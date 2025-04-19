@@ -10,6 +10,7 @@ const blob = document.getElementById("blob");
 document.body.onpointermove = event => {
   const x = event.clientX + window.scrollX;
   const y = event.clientY + window.scrollY;
+if(blob){
 
   blob.animate({
     left: `${x}px`,
@@ -18,16 +19,17 @@ document.body.onpointermove = event => {
     duration: 2500,
     fill: "forwards"
   });
+}
 };
 
     const{publicKey, connected } = useWallet();
     return (
         <>
-        <BackgroundToggle>
-
-        {/* ------------------------------------------------------cursor----------------------------------------------------------------------- */}
+        <BackgroundToggle/>
         <div id="blob"> <div id="blur"></div>
         </div>
+
+        {/* ------------------------------------------------------cursor----------------------------------------------------------------------- */}
       {/* ------------------------------------------------------------------------------------------------------ */}
         <div className="w-full h-screen flex flex-col gap-4 items-center justify-center">
             <WalletMultiButton/>
@@ -40,7 +42,6 @@ document.body.onpointermove = event => {
             }
             </div>
         </div>
-        </BackgroundToggle>
         </>
     )
 }

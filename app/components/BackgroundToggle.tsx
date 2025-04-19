@@ -1,31 +1,33 @@
 // ToggleBackground.tsx
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as anime from 'animejs';
 
 // ✅ THIS is the key
+// {
+//   backgroundColor: nextColor,
+//   duration: 800,
+//   easing: 'easeInOutQuad',
+// }
 
 const ToggleBackground: React.FC = () => {
   const divRef = useRef<HTMLDivElement>(null);
   const [isBlack, setIsBlack] = useState(true);
 
+  const nextColor = isBlack ? '#FFFFFF' : '#000000';
   const handleClick = () => {
-    const nextColor = isBlack ? '#FFFFFF' : '#000000';
-
-    if (divRef.current) {
-      anime({
-        targets: divRef.current,
-        backgroundColor: nextColor,
-        duration: 800,
-        easing: 'easeInOutQuad',
-      });
-    }
-
     setIsBlack(!isBlack);
   };
+  useEffect(()=>{
+    anime.animate('.backgroundChange',{
+      backgroundColor: nextColor,
+ duration: 800,
+easing: 'easeInOutQuad',
+    });
+  },[])
 
   return (
     <div
-      ref={divRef}
+      className='backgroundChange'
       onClick={handleClick}
       style={{
         width: '100vw',
